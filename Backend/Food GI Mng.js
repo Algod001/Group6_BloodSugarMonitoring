@@ -8,7 +8,7 @@ function categorizeGI(giValue) {
   return "High";
 }
 
-// 1️⃣ Add food
+// adding food
 function addFood(foodName, category, giValue) {
   const giLevel = categorizeGI(giValue);
   const newFood = {
@@ -23,7 +23,7 @@ function addFood(foodName, category, giValue) {
   return newFood;
 }
 
-// 2️⃣ Update food
+// update the food
 function updateFood(foodId, updatedData) {
   const food = foods.find(f => f.food_id === foodId);
   if (!food) {
@@ -41,7 +41,7 @@ function updateFood(foodId, updatedData) {
   return food;
 }
 
-// 3️⃣ Delete food
+// delete
 function deleteFood(foodId) {
   const index = foods.findIndex(f => f.food_id === foodId);
   if (index === -1) {
@@ -53,7 +53,7 @@ function deleteFood(foodId) {
   return true;
 }
 
-// 4️⃣ Search food
+// search food
 function searchFoods({ name, category, minGI, maxGI, level }) {
   return foods.filter(food => {
     return (
@@ -72,3 +72,4 @@ addFood("White Rice", "Grain", 72);
 updateFood(2, { gi_value: 68 });
 console.log(searchFoods({ category: "Grain" }));
 deleteFood(1);
+
