@@ -1,0 +1,582 @@
+/* MainPage.module.css */
+
+.container {
+  min-height: 100vh;
+  background: #020617;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1e293b;
+}
+
+.headerContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIconWrapper {
+  position: relative;
+}
+
+.logoGlow {
+  position: absolute;
+  inset: 0;
+  background: #06b6d4;
+  filter: blur(24px);
+  opacity: 0.2;
+}
+
+.logoIcon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.logoText p {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.loginBtn {
+  padding: 10px 24px;
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.loginBtn:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 160px 24px 100px;
+  overflow: hidden;
+}
+
+.heroBgGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(6, 182, 212, 0.1), transparent);
+}
+
+.heroBlob1 {
+  position: absolute;
+  top: 80px;
+  left: 25%;
+  width: 384px;
+  height: 384px;
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.heroBlob2 {
+  position: absolute;
+  bottom: 0;
+  right: 25%;
+  width: 384px;
+  height: 384px;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 9999px;
+  color: #22d3ee;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+.heroTitle {
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.heroGradientText {
+  display: block;
+  background: linear-gradient(to right, #22d3ee, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDescription {
+  font-size: 20px;
+  color: #94a3b8;
+  margin-bottom: 48px;
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  padding: 16px 32px;
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnPrimary:hover {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+  transform: translateY(-2px);
+}
+
+.btnSecondary {
+  padding: 16px 32px;
+  background: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnSecondary:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+/* Features Section */
+.features {
+  padding: 80px 24px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  position: relative;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.featureCard:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.featureCard:hover .featureCardGlow {
+  opacity: 1;
+}
+
+.featureCardGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), transparent);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.featureCardContent {
+  position: relative;
+}
+
+.featureIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.featureIconPurple {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+}
+
+.featureIconCyan {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+}
+
+.featureIconOrange {
+  background: linear-gradient(135deg, #f97316, #ef4444);
+}
+
+.featureTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.featureListItem:last-child {
+  margin-bottom: 0;
+}
+
+.featureBullet {
+  color: #22d3ee;
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+/* User Roles Section */
+.userRoles {
+  padding: 80px 24px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.sectionTitle {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.sectionSubtitle {
+  font-size: 20px;
+  color: #94a3b8;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.roleCard {
+  position: relative;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 40px;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.roleCard:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.roleCard:hover .roleCardGlow {
+  opacity: 1;
+}
+
+.roleCardGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.roleCardGlowCyan {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), transparent);
+}
+
+.roleCardGlowBlue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+}
+
+.roleCardContent {
+  position: relative;
+}
+
+.roleIcon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+}
+
+.roleIconCyan {
+  color: #22d3ee;
+}
+
+.roleIconBlue {
+  color: #60a5fa;
+}
+
+.roleTitle {
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.roleDescription {
+  font-size: 18px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.roleTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.roleTag {
+  padding: 8px 16px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.roleTagCyan {
+  color: #22d3ee;
+  border-color: #334155;
+}
+
+.roleTagBlue {
+  color: #60a5fa;
+  border-color: #334155;
+}
+
+/* Benefits Section */
+.benefits {
+  position: relative;
+  padding: 96px 24px;
+  overflow: hidden;
+}
+
+.benefitsBg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+}
+
+.benefitsBlob {
+  position: absolute;
+  top: 0;
+  left: 33.333%;
+  width: 384px;
+  height: 384px;
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.benefitsContent {
+  position: relative;
+  max-width: 896px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.benefitsIconWrapper {
+  display: inline-block;
+  padding: 16px;
+  background: #0f172a;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.benefitsIcon {
+  width: 64px;
+  height: 64px;
+  color: #22d3ee;
+}
+
+.benefitsTitle {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.benefitsDescription {
+  font-size: 20px;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid #1e293b;
+  background: #020617;
+  padding: 48px 24px;
+}
+
+.footerContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerLogoIcon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerLogoText h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.footerLogoText p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.footerInfo {
+  text-align: center;
+}
+
+.footerCopyright {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.footerTagline {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .footerContent {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footerInfo {
+    text-align: right;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 40px;
+  }
+
+  .heroDescription {
+    font-size: 18px;
+  }
+
+  .featuresGrid,
+  .rolesGrid {
+    grid-template-columns: 1fr;
+  }
+}
