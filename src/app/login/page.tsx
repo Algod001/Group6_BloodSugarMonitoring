@@ -1,15 +1,69 @@
-import React from "react";
-import styles from "./Login.module.css";
-import { Activity, Mail, Lock, User, ArrowRight } from "lucide-react";
+'use client'
+import React, { useState } from "react";
+import styles from "./Login.module.css"; 
+import { Activity, Mail, Lock, ArrowRight } from "lucide-react";
+import { supabase } from '../../config/supabaseClient';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // 1. Authenticate with Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
+     // [cite_start]// 2. Fetch User Role from your custom 'users' table [cite: 20]
+      // We use the UUID from auth to find the correct user profile
+      const { data: userProfile, error: profileError } = await supabase
+        .from('users')
+        .select('role, user_name')
+        .eq('auth_id', authData.user.id)
+        .single();
+
+      if (profileError) {
+        console.error("Profile Fetch Error:", profileError);
+        alert("Login successful, but could not find user profile.");
+        return;
+      }
+
+      // 3. Redirect based on Role
+      alert(`Welcome back, ${userProfile.user_name}!`);
+      
+      if (userProfile.role === 'patient') {
+        router.push('/patient/dashboard');
+      } else if (userProfile.role === 'specialist') {
+        router.push('/specialist/dashboard');
+      } else if (userProfile.role === 'administrator') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/'); // Fallback
+      }
+
+    } catch (error: any) {
+      alert("Login Failed: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.blob1}></div>
       <div className={styles.blob2}></div>
 
       <div className={styles.formWrapper}>
-        {/* Logo */}
         <div className={styles.logo}>
           <div className={styles.logoIconWrapper}>
             <div className={styles.logoGlow}></div>
@@ -19,127 +73,58 @@ export default function LoginPage() {
           </div>
           <div className={styles.logoText}>
             <h1>Blood Sugar Monitoring</h1>
-            <p>AI-Powered Monitoring</p>
+            <p>Welcome Back</p>
           </div>
         </div>
 
-        {/* Form Container */}
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
-            <h2 className={styles.formTitle}>Create Account</h2>
+            <h2 className={styles.formTitle}>Sign In</h2>
             <p className={styles.formSubtitle}>
-              Join Blood Sugar Monitoring to start monitoring your blood sugar levels with AI-driven insights and automated alerts.
+              Access your dashboard and manage your health.
             </p>
           </div>
 
-          <form className={styles.form}>
-            {/* Full Name Input */}
+          <form className={styles.form} onSubmit={handleLogin}>
             <div className={styles.inputGroup}>
-              <label htmlFor="fullName" className={styles.label}>
-                Full Name
-              </label>
-              <div className={styles.inputWrapper}>
-                <User className={styles.inputIcon} />
-                <input
-                  type="text"
-                  id="fullName"
-                  placeholder="Enter your full name"
-                  className={styles.input}
-                />
-              </div>
-            </div>
-
-            {/* Email Input */}
-            <div className={styles.inputGroup}>
-              <label htmlFor="email" className={styles.label}>
-                Email Address
-              </label>
+              <label htmlFor="email" className={styles.label}>Email Address</label>
               <div className={styles.inputWrapper}>
                 <Mail className={styles.inputIcon} />
                 <input
                   type="email"
-                  id="email"
+                  required
+                  className={styles.input}
                   placeholder="Enter your email"
-                  className={styles.input}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Password Input */}
             <div className={styles.inputGroup}>
-              <label htmlFor="password" className={styles.label}>
-                Password
-              </label>
+              <label htmlFor="password" className={styles.label}>Password</label>
               <div className={styles.inputWrapper}>
                 <Lock className={styles.inputIcon} />
                 <input
                   type="password"
-                  id="password"
-                  placeholder="Create a password"
+                  required
                   className={styles.input}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Confirm Password Input */}
-            <div className={styles.inputGroup}>
-              <label htmlFor="confirmPassword" className={styles.label}>
-                Confirm Password
-              </label>
-              <div className={styles.inputWrapper}>
-                <Lock className={styles.inputIcon} />
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  placeholder="Confirm your password"
-                  className={styles.input}
-                />
-              </div>
-            </div>
-
-            {/* Role Selection */}
-            <div className={styles.inputGroup}>
-              <label htmlFor="role" className={styles.label}>
-                Account Type
-              </label>
-              <select id="role" className={styles.select}>
-                <option value="">Select your role</option>
-                <option value="patient">Patient</option>
-                <option value="specialist">Specialist</option>
-                <option value="clinic-staff">Clinic Staff</option>
-                <option value="administrator">Administrator</option>
-              </select>
-            </div>
-
-            {/* Terms Checkbox */}
-            <div className={styles.checkboxGroup}>
-              <input type="checkbox" id="terms" className={styles.checkbox} />
-              <label htmlFor="terms" className={styles.checkboxLabel}>
-                I agree to the{" "}
-                <a href="#" className={styles.link}>
-                  Terms of Service
-                </a>{" "}
-                and{" "}
-                <a href="#" className={styles.link}>
-                  Privacy Policy
-                </a>
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <button type="submit" className={styles.submitBtn}>
-              <span>Create Account</span>
+            <button type="submit" className={styles.submitBtn} disabled={loading}>
+              <span>{loading ? "Signing In..." : "Sign In"}</span>
               <ArrowRight className="w-5 h-5" />
             </button>
           </form>
 
-          {/* Sign In Link */}
           <div className={styles.footer}>
             <p className={styles.footerText}>
-              Already have an account?{" "}
-              <a href="#" className={styles.footerLink}>
-                Sign In
-              </a>
+              Don't have an account? <a href="/signup" className={styles.footerLink}>Create Account</a>
             </p>
           </div>
         </div>
