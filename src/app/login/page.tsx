@@ -23,30 +23,42 @@ export default function LoginPage() {
       });
 
       if (authError) throw authError;
+      
+      if (!authData.user) {
+        throw new Error("Login failed, user not found.");
+      }
 
-     // [cite_start]// 2. Fetch User Role from your custom 'users' table [cite: 20]
-      // We use the UUID from auth to find the correct user profile
+      // 2. Fetch User Role from your custom 'users' table
+      // We use the UUID from auth to find the correct user profile 
       const { data: userProfile, error: profileError } = await supabase
         .from('users')
         .select('role, user_name')
-        .eq('auth_id', authData.user.id)
+        .eq('auth_id', authData.user.id) // Match the auth_id
         .single();
 
       if (profileError) {
         console.error("Profile Fetch Error:", profileError);
-        alert("Login successful, but could not find user profile.");
+        alert("Login successful, but could not find user profile in database.");
         return;
+      }
+      
+      if (!userProfile) {
+         alert("Login successful, but user profile is missing.");
+         return;
       }
 
       // 3. Redirect based on Role
       alert(`Welcome back, ${userProfile.user_name}!`);
       
+      // These redirects will 404 until you create the pages
       if (userProfile.role === 'patient') {
         router.push('/patient/dashboard');
       } else if (userProfile.role === 'specialist') {
         router.push('/specialist/dashboard');
       } else if (userProfile.role === 'administrator') {
         router.push('/admin/dashboard');
+      } else if (userProfile.role === 'staff') {
+        router.push('/staff/dashboard');
       } else {
         router.push('/'); // Fallback
       }

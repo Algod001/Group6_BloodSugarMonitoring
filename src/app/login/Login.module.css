@@ -1,4 +1,4 @@
-/* SignUp.module.css */
+/* Login.module.css */
 
 .container {
   min-height: 100vh;
@@ -190,6 +190,13 @@
   transition: all 0.3s;
   outline: none;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 48px; /* Make space for arrow */
 }
 
 .select:focus {
@@ -262,6 +269,13 @@
 
 .submitBtn:active {
   transform: translateY(0);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* Footer */

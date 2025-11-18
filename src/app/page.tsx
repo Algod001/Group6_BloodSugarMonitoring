@@ -50,7 +50,9 @@ export default function MainPage() {
             alerts.
           </p>
           <div className={styles.heroButtons}>
-            <button className={styles.btnPrimary}>Get Started</button>
+            <button className={styles.btnPrimary} onClick={() => router.push("/signup")}>
+              Get Started
+            </button>
             <button className={styles.btnSecondary}>Learn More</button>
           </div>
         </div>
